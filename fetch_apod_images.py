@@ -9,13 +9,12 @@ def load_apod_images(api_key):
         'count': '30',
         'api_key': api_key
     }
-    print(api_key)
     response = requests.get('https://api.nasa.gov/planetary/apod', params=payload)
     response.raise_for_status()
     data = response.json()
 
     images_url = []
-    number_image = 1
+    number_image = 0
 
     for entry in data:
         if 'url' in entry:

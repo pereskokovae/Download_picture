@@ -27,6 +27,7 @@ def fetch_spacex_last_launch(id_spacex):
             response = requests.get(link)
             response.raise_for_status()
             filename = f'images/spacex{number_image}.jpg'
+
             with open(filename, 'wb') as file:
                 file.write(response.content)
             number_image += 0
@@ -36,4 +37,4 @@ if __name__ == "__main__":
     id_spacex = get_id_spacex()
 
     path_for_images()       
-    fetch_spacex_last_launch()
+    fetch_spacex_last_launch(id_spacex)
