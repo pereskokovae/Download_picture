@@ -2,11 +2,12 @@ import requests
 import os
 from urllib.parse import unquote
 from helpers import path_for_images
+from helpers import get_count_photo
 
 
-def load_apod_images(api_key):
+def load_apod_images(api_key, count_photo):
     payload = {
-        'count': '30',
+        'count': count_photo,
         'api_key': api_key
     }
     response = requests.get('https://api.nasa.gov/planetary/apod', params=payload)
@@ -34,5 +35,7 @@ def load_apod_images(api_key):
 
 if __name__ == "__main__":
     api_key = os.getenv('API_KEY')
+    count_photo = get_count_photo()
+    
     path_for_images()
-    load_apod_images(api_key)
+    load_apod_images(api_key, count_photo)
