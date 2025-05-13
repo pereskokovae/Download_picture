@@ -1,41 +1,37 @@
 import requests
 import os
 from urllib.parse import unquote
-from helpers import path_for_images
-from helpers import get_count_photo
+from pathlib import Path
+from helpers import get_photo_count
+from helpers import download_images_to_directory
 
 
-def load_apod_images(api_key, count_photo):
+def load_apod_images(api_key, photo_count):
     payload = {
-        'count': count_photo,
+        'count': photo_count,
         'api_key': api_key
     }
     response = requests.get('https://api.nasa.gov/planetary/apod', params=payload)
     response.raise_for_status()
-    data = response.json()
+    apod_data = response.json()
 
-    images_url = []
-    number_image = 0
+    image_urls = []
 
-    for entry in data:
-        if 'url' in entry:
-            images_url.append(unquote(entry['url']))
+    for apod_url in apod_data:
+        if 'url' in apod_url:
+            image_urls.append(unquote(apod_url['url']))
 
-        for nasa_apod in images_url:
-            file_format = os.path.splitext(nasa_apod)[1]
-            response = requests.get(nasa_apod)
-            response.raise_for_status()
+    for number_image, nasa_apod in enumerate(image_urls):
+        file_format = os.path.splitext(nasa_apod)[1]
+        filename = f'images/nasa_apod{number_image}{file_format}'
 
-            filename = f'images/nasa_apod{number_image}{file_format}'
+        download_images_to_directory(filename, api_key)
 
-        with open(filename, 'wb') as file:
-            file.write(response.content)
-        number_image += 1
 
 
 if __name__ == "__main__":
-    api_key = os.getenv('API_KEY')
-    count_photo = get_count_photo()
+    api_key = os.getenv('NASA_API_KEY')
+    photo_count = get_photo_count()
     
-    path_for_images()
-    load_apod_images(api_key, count_photo)
+    Path('images/').mkdir(parents=True, exist_ok=True)
+    load_apod_images(api_key, photo_count)

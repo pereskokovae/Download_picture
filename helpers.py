@@ -1,12 +1,8 @@
-from pathlib import Path
 import argparse
+import requests
 
 
-def path_for_images():
-    Path('images/').mkdir(parents=True, exist_ok=True)
-
-
-def get_id_spacex():
+def get_spacex_id():
     parser = argparse.ArgumentParser(
         description='Программа загрузит фото от SpaceX по указанному ID запуска.'
     )
@@ -15,7 +11,7 @@ def get_id_spacex():
     return args.id
 
 
-def get_count_photo():
+def get_photo_count():
     parser = argparse.ArgumentParser(
         description='Программа загрузит столько фотографий-сколько вы укажите.'
     )
@@ -31,3 +27,14 @@ def break_between_sending():
     parser.add_argument("-t", "--time", help="Введите время перерыва в секундах, которое должно пройти перед отправкой новой фотографии.")
     args = parser.parse_args()
     return args.time
+
+
+def download_images_to_directory(url, filename, api_key):
+    payload = {
+        'api_key': api_key
+    }
+    response_image = requests.get(url, params=payload)
+    response_image.raise_for_status()
+
+    with open(filename, 'wb') as file:
+        file.write(response_image.content)

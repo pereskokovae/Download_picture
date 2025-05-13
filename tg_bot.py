@@ -1,12 +1,9 @@
 import telegram
 import os
-import dotenv
 import random
 import time
 from helpers import break_between_sending
 from pathlib import Path
-
-dotenv.load_dotenv()
 
 
 def send_messages(token_tg_bot, path_to_pictures, breaktime):
@@ -17,7 +14,8 @@ def send_messages(token_tg_bot, path_to_pictures, breaktime):
     while True:
         images_for_publish = os.listdir(path_to_pictures)
         random_image = random.choice(images_for_publish)
-        bot.send_photo(chat_id=chat_id,  photo=open(f'images/{random_image}', 'rb'))
+        with open(f'images/{random_image}', 'rb') as photos:
+            bot.send_photo(chat_id=chat_id,  photo=photos)
 
         time.sleep(breaktime)
 
