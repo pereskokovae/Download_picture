@@ -21,11 +21,11 @@ def load_apod_images(api_key, photo_count):
         if 'url' in apod_url:
             image_urls.append(unquote(apod_url['url']))
 
-    for image_number, nasa_apod in enumerate(image_urls):
-        file_format = os.path.splitext(nasa_apod)[1]
+    for image_number, nasa_apod_url in enumerate(image_urls):
+        file_format = os.path.splitext(nasa_apod_url)[1]
         filepath = f'images/nasa_apod{image_number}{file_format}'
 
-        download_images_to_directory(filepath, api_key)
+        download_images_to_directory(nasa_apod_url, filepath, api_key)
 
 
 
