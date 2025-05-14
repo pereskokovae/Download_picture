@@ -23,8 +23,8 @@ def fetch_spacex_last_launch(spacex_id):
             for url in link_image:
                 image_links.append(url)
 
-    for number_image, url in enumerate(link_image):
-        filename = f'images/spacex{number_image}.jpg'
+    for image_number, url in enumerate(link_image):
+        filename = f'images/spacex{image_number}.jpg'
 
         download_images_to_directory(url, filename)
 

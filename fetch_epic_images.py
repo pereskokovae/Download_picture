@@ -24,10 +24,10 @@ def load_epic_images(api_key):
     for date in all_dates:
         formated_date = datetime.fromisoformat(date).strftime("%Y/%m/%d")
 
-        for number_image, image in enumerate(all_images):
-            image_name = str.split(image)[number_image]
+        for image_number, image in enumerate(all_images):
+            image_name = str.split(image)[image_number]
             url = f'https://api.nasa.gov/EPIC/archive/natural/{formated_date}/png/{image_name}.png?'
-            filename = f'images/nasa_epic{number_image}.png'
+            filename = f'images/nasa_epic{image_number}.png'
             
             download_images_to_directory(url, filename, api_key)
 
