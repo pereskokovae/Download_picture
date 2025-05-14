@@ -27,9 +27,9 @@ def load_epic_images(api_key):
         for image_number, image in enumerate(all_images):
             image_name = str.split(image)[image_number]
             url = f'https://api.nasa.gov/EPIC/archive/natural/{formated_date}/png/{image_name}.png?'
-            filename = f'images/nasa_epic{image_number}.png'
+            filepath = f'images/nasa_epic{image_number}.png'
             
-            download_images_to_directory(url, filename, api_key)
+            download_images_to_directory(url, filepath, api_key)
 
 
 if __name__ == "__main__":

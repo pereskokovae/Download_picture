@@ -24,9 +24,9 @@ def fetch_spacex_last_launch(spacex_id):
                 image_links.append(url)
 
     for image_number, url in enumerate(link_image):
-        filename = f'images/spacex{image_number}.jpg'
+        filepath = f'images/spacex{image_number}.jpg'
 
-        download_images_to_directory(url, filename)
+        download_images_to_directory(url, filepath)
 
 
 if __name__ == "__main__":
