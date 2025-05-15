@@ -29,12 +29,12 @@ def break_between_sending():
     return args.time
 
 
-def download_images_to_directory(urls, filepaths, api_keys):
+def downloads_images_to_directory(url, filepath, api_key):
     payload = {
-        'api_key': api_keys
+        'api_key': api_key
     }
-    response_image = requests.get(urls, params=payload)
+    response_image = requests.get(url, params=payload)
     response_image.raise_for_status()
 
-    with open(filepaths, 'wb') as file:
+    with open(filepath, 'wb') as file:
         file.write(response_image.content)

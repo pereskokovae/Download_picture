@@ -3,7 +3,7 @@ import os
 import dotenv
 from datetime import datetime
 from pathlib import Path
-from helpers import download_images_to_directory
+from helpers import downloads_images_to_directory
 
 
 def load_epic_images(api_key):
@@ -29,7 +29,7 @@ def load_epic_images(api_key):
             url = f'https://api.nasa.gov/EPIC/archive/natural/{formated_date}/png/{image_name}.png?'
             filepath = f'images/nasa_epic{image_number}.png'
             
-            download_images_to_directory(url, filepath, api_key)
+            downloads_images_to_directory(url, filepath, api_key)
 
 
 if __name__ == "__main__":

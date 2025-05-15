@@ -1,7 +1,7 @@
 import requests
 from pathlib import Path
 from helpers import get_spacex_id
-from helpers import download_images_to_directory
+from helpers import downloads_images_to_directory
 
 
 def fetch_spacex_last_launch(spacex_id):
@@ -26,7 +26,7 @@ def fetch_spacex_last_launch(spacex_id):
     for image_number, url in enumerate(link_image):
         filepath = f'images/spacex{image_number}.jpg'
 
-        download_images_to_directory(url, filepath)
+        downloads_images_to_directory(url, filepath)
 
 
 if __name__ == "__main__":
