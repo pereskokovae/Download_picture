@@ -29,7 +29,7 @@ def break_between_sending():
     return args.time
 
 
-def downloads_images_to_directory(url, filepath, api_key):
+def downloads_image_to_directory(url, filepath, api_key):
     payload = {
         'api_key': api_key
     }

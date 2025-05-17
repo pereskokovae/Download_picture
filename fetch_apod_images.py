@@ -3,7 +3,7 @@ import os
 from urllib.parse import unquote
 from pathlib import Path
 from helpers import get_photo_count
-from helpers import downloads_images_to_directory
+from helpers import downloads_image_to_directory
 
 
 def load_apod_images(api_key, photo_count):
@@ -25,7 +25,7 @@ def load_apod_images(api_key, photo_count):
         file_format = os.path.splitext(nasa_apod_url)[1]
         filepath = f'images/nasa_apod{image_number}{file_format}'
 
-        downloads_images_to_directory(nasa_apod_url, filepath, api_key)
+        downloads_image_to_directory(nasa_apod_url, filepath, api_key)
 
 
 
